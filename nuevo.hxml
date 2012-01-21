@@ -1,0 +1,5 @@
+-swf-lib libreria.swf 
+-swf-header 800:600:25:000000
+-swf9 nuevo.swf
+-main Principal
+
