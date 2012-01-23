@@ -4,6 +4,12 @@
   <frame>
     <library>
 	<font name = "Ethnocen" import    = "recursos/ETHNOCEN.TTF" glyphs       = "abcdefghijklmnñopqrstuvwxyz áéíóúÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789"/>
+	<bitmap id = "Madera" import      = "imagenes/madera.png" />
+	<bitmap id = "Fuego" import       = "imagenes/fuego.png" />
+	<bitmap id = "Tierra" import      = "imagenes/tierra.png" />
+	<bitmap id = "Metal" import       = "imagenes/metal.png" />
+	<bitmap id = "Agua" import        = "imagenes/agua.png" />
+	<bitmap id = "Logo" import        = "imagenes/escudo.png"/>
     </library>
   </frame>
 </movie>

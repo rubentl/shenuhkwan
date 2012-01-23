@@ -2,16 +2,46 @@ package;
 
 import flash.display.Loader;
 import flash.display.Sprite;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
 
-class Loader extends flash.display.Loader {
+class Ethnocen extends flash.text.Font{public function new(){super();}} 
+class Volver extends Bitmap{public function new(){super();}} 
+class Madera_menu extends Bitmap{public function new(){super();}}
+class Clip_humo extends MovieClip{public function new(){super();}}
+
+
+class MiSprite extends flash.display.Sprite {
 	public var url:String;
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
 } 
+
+class Texto extends flash.text.TextField{
+	public var url:String;
+	public var origX:Int;
+	public var origY:Int;
+	public var profun:Int;
+    public function new(_txt:String,_x:Int,_y:Int,_profun:Int,_col:Int,_tam:Int){
+        super();
+        var format: flash.text.TextFormat = new flash.text.TextFormat();
+        format.font = "Ethnocen";
+        format.color = _col;
+        format.size = _tam;
+        embedFonts = true;
+        autoSize = flash.text.TextFieldAutoSize.RIGHT;
+        defaultTextFormat = format;
+        text = _txt;
+        x = origX = _x;
+        y = origY = _y;
+        profun = _profun;
+    }
+}
+
 class Quienessomos {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
@@ -40,25 +70,26 @@ class Quienessomos {
 		marco.graphics.endFill();
 		flash.Lib.current.addChild(marco);
 		
-		var volver:Loader = new Loader();
-		volver.load(new flash.net.URLRequest("../imagenes/madera/volver.png"));
-		volver.url = "../index.html";
+		var volver:MiSprite = new MiSprite();
+        var bitmap1 = new Volver();
+        volver.addChild(bitmap1);
+		volver.url = "index.html";
 		volver.scaleX = volver.scaleY -= 0.4;
 		
-		var madera_menu:Loader = new Loader();
-		madera_menu.load(new flash.net.URLRequest("../imagenes/madera/madera_menu.png"));
+		var madera_menu:MiSprite = new MiSprite();
+        var bitmap2 = new Madera_menu();
+        madera_menu.addChild(bitmap2);
 		madera_menu.scaleX = madera_menu.scaleY -= 0.3;
-		var humo:Loader = new Loader();
+		var humo:Clip_humo = new Clip_humo();
 		var marco0:Array<Dynamic> = [];
 		marco0 = marco0.concat([0.3, 0, 0, 0, 0]);
 		marco0 = marco0.concat([0, 1, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0.3, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0, 0.5, 0]);
-		humo.load(new flash.net.URLRequest("../imagenes/humo.swf"));
 		humo.filters = [new flash.filters.ColorMatrixFilter(marco0)];
 		humo.name = "humoLoader";
 
-		manuClip = flash.Lib.attach("manu");
+		manuClip = flash.Lib.attach("Clip_manu");
 		manuClip.name = "manuClip";
 		manuClip.scaleX = manuClip.scaleY -= 0.2;
 		manuClip.stop();
@@ -66,25 +97,13 @@ class Quienessomos {
 		alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
 		alarmTimer.start();
 
-		var asociacion:Loader = new Loader();
-		asociacion.load(new flash.net.URLRequest("../imagenes/madera/asociacion.png"));
-		asociacion.url = "madera/asociacion.html";
-		asociacion.scaleX = asociacion.scaleY -= 0.3;
+        var bienvenidos:Texto = new Texto("Bienvenidos",120,130,50,0xffffff,18);
+        bienvenidos.url = "madera/bienvenidos.html";
+        var quienes:Texto = new Texto("Quienes somos",400,150,60,0xffffff,18);
+        quienes.url = "madera/quienes.html";
+        var contacto:Texto = new Texto("Contacto",320,450,65,0xffffff,18);
+        contacto.url = "madera/contacto.html";
 
-		var fundadores:Loader = new Loader();
-		fundadores.load(new flash.net.URLRequest("../imagenes/madera/fundadores.png"));
-		fundadores.url = "madera/fundadores.html";
-		fundadores.scaleX = fundadores.scaleY -= 0.25;
-
-		var preguntas:Loader = new Loader();
-		preguntas.load(new flash.net.URLRequest("../imagenes/madera/preguntas.png"));
-		preguntas.url = "madera/preguntas.html";
-		preguntas.scaleX = preguntas.scaleY -= 0.25;
-		
-		var escudo:Loader = new Loader();
-		escudo.load(new flash.net.URLRequest("../imagenes/madera/escudo.png"));
-		escudo.url = "madera/escudo.html";
-		escudo.scaleX = escudo.scaleY -= 0.25;
 		volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
 		manuClip.x = manuClip.origX = 290;
@@ -93,44 +112,22 @@ class Quienessomos {
 		humo.y = humo.origY = 250;
 		madera_menu.x = madera_menu.origX = 190;
 		madera_menu.y = madera_menu.origY = 50;
-		asociacion.x = asociacion.origX = 120;
-		asociacion.y = asociacion.origY= 130;
-		preguntas.x = preguntas.origX = 120;
-		preguntas.y = preguntas.origY = 250;
-		fundadores.x = fundadores.origX = 320;
-		fundadores.y = fundadores.origY = 450;
-		escudo.x = escudo.origX = 500;
-		escudo.y = escudo.origY = 250;
 		volver.profun = 15;
 		madera_menu.profun = 25;
 		humo.profun = 25;
 		manuClip.profun = 40;
-		asociacion.profun = 50;
-		escudo.profun = 58;
-		preguntas.profun = 60;
-		fundadores.profun = 65;
-		arrObj = [madera_menu, volver, humo, manuClip, asociacion, fundadores, escudo, preguntas];
+		arrObj = [madera_menu, humo, manuClip, bienvenidos, quienes, contacto, volver];
 		for (i in 0...arrObj.length){
 		    marco.addChild(arrObj[i]);
 		    arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
 		}
-		asociacion.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		asociacion.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		asociacion.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		fundadores.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		fundadores.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		fundadores.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		preguntas.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		preguntas.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		preguntas.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		escudo.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		escudo.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		escudo.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		volver.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        for (i in 3...arrObj.length){
+            arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        }
 
-		var archivo:URLRequest = new flash.net.URLRequest("../audio/madera.mp3");
+		var archivo:URLRequest = new flash.net.URLRequest("audio/madera.mp3");
 		sonido = new flash.media.Sound(archivo);
 		canal = sonido.play(0, 10);
 	}
@@ -160,14 +157,14 @@ class Quienessomos {
 		arg1.target.y = tmpY;
 	    }
 	    if (arg1.target.name == "manuClip"){
-		if (manuClip.currentFrame == 1){
-		    manuClip.stop();
-		}
-		if (contador == 5){
-		    manuClip.nextFrame();
-		    contador = 0;
-		}
-		contador = (contador + 1);
+		    if (manuClip.currentFrame == 1){
+		        manuClip.stop();
+		    }
+		    if (contador == 5){
+		        manuClip.nextFrame();
+		        contador = 0;
+		    }
+		    contador = (contador + 1);
 	    }
 	}
 	public static function mouseOVER(arg1:flash.events.Event){
