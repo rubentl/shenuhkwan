@@ -89,7 +89,7 @@ class Universo extends flash.display.Sprite{
         addEventListener(flash.events.Event.ENTER_FRAME,update);
     }
     public function update(e:flash.events.Event){
-        if (flash.Lib.current.numChildren < 200){
+        if (flash.Lib.current.numChildren < 400){
             var s:Start = new Start();
             s.x = Math.random()*1000;
             s.y = Math.random()*650;
@@ -105,6 +105,8 @@ class Principal {
     static var sonido:flash.media.Sound;
     static inline var centroX:Int = 335;
     static inline var centroY:Int = 200;
+    static inline var corregirX:Int = 40;
+    static inline var corregirY:Int = 40;
     static var incAngulo:Float;
     static inline var cantidad:Int = 5;
     static inline var difAngular:Float = (Math.PI *2)/cantidad;
@@ -141,35 +143,35 @@ class Principal {
     static function ElMenu(){
         var madera:MiSprite = new MiSprite();
         madera.index = 0;
-        /*madera.url = "menus/quienessomos.html";*/
+        madera.url = "menus/quienessomos.html";
         madera.name = "quienes somos";
         madera.color_filtro = 65280;
         cargarImg(madera, new Madera());
         
         var fuego:MiSprite = new MiSprite();
         fuego.index = 1;
-        /*fuego.url = "menus/principios.html";*/
+        fuego.url = "menus/principios.html";
         fuego.name = "qué hacemos";
         fuego.color_filtro = 16711680;
         cargarImg(fuego, new Fuego());
         
         var tierra:MiSprite = new MiSprite();
         tierra.index = 2;
-        /*tierra.url = "menus/maestros.html";*/
+        tierra.url = "menus/maestros.html";
         tierra.name = "dónde estamos";
         tierra.color_filtro = 15443011; 
         cargarImg(tierra, new Tierra());
         
         var metal:MiSprite = new MiSprite();
         metal.index = 3;
-        /*metal.url = "menus/galeria.html";*/
+        metal.url = "menus/galeria.html";
         metal.name = "galería";
         metal.color_filtro = 13882323; 
         cargarImg(metal, new Metal());
         
         var agua:MiSprite = new MiSprite();
         agua.index = 4;
-        /*agua.url = "menus/noticias.html";*/
+        agua.url = "menus/noticias.html";
         agua.name = "programas";
         agua.color_filtro = 29928;
         cargarImg(agua, new Agua());
@@ -177,10 +179,10 @@ class Principal {
     
     public static function cargarImg(arg1:MiSprite, dibu:Bitmap){
         arg1.angulo = difAngular * arg1.index;
-        arg1.x = Math.cos(arg1.angulo) * amplitudX + (centroX  );
-        arg1.y = Math.sin(arg1.angulo) * amplitudY + (centroY  );
-        arg1.scaleX = arg1.scaleX -= 0.55;
-        arg1.scaleY = arg1.scaleY -= 0.55;
+        arg1.x = Math.cos(arg1.angulo) * amplitudX + (centroX + corregirX );
+        arg1.y = Math.sin(arg1.angulo) * amplitudY + (centroY + corregirY );
+        arg1.scaleX = arg1.scaleX -= 0.75;
+        arg1.scaleY = arg1.scaleY -= 0.75;
         arg1.texto = new Texto(arg1.name,10,10,0xffffff,20);
         arg1.texto.visible = false;
         /*arg1.filters = [new flash.filters.GlowFilter(arg1.color_filtro, 0.5, 50, 50)];*/
@@ -194,8 +196,8 @@ class Principal {
     public static function moverMenu(arg1:flash.events.Event){
         incAngulo = (mc.stage.mouseX - centroX) / centroY * 0.01;
         arg1.target.angulo = arg1.target.angulo + incAngulo;
-        arg1.target.x = Math.cos(arg1.target.angulo) * amplitudX + centroX + 10;
-        arg1.target.y = Math.sin(arg1.target.angulo) * amplitudY + centroY + 10;
+        arg1.target.x = Math.cos(arg1.target.angulo) * amplitudX + (centroX + corregirX);
+        arg1.target.y = Math.sin(arg1.target.angulo) * amplitudY + (centroY + corregirY);
     }
 
     public static function mouseOVERmenu(arg1:flash.events.Event){
