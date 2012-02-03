@@ -3,3 +3,20 @@
 -swf9 nuevo.swf
 -main Principal
 
+--next
+-swf-lib imagenes/madera/madera.swf
+-swf-header 800:600:25:000000
+-swf9 quienessomos.swf
+-main Quienessomos
+
+--next
+-swf-lib imagenes/fuego/fuego.swf
+-swf-header 800:600:25:000000
+-swf9 principios.swf
+-main Principios
+
+--next
+-swf-lib imagenes/tierra/tierra.swf
+-swf-header 800:600:25:000000
+-swf9 maestros.swf
+-main Maestros

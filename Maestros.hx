@@ -6,13 +6,19 @@ import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
 
-class Loader extends flash.display.Loader {
+
+class Ethnocen extends flash.text.Font{public function new(){super();}} 
+class Volver extends Bitmap{public function new(){super();}} 
+class Tierra_menu extends Bitmap{public function new(){super();}}
+class Clip_humo extends MovieClip{public function new(){super();}}
+
+class MiSprite extends flash.display.Sprite {
 	public var url:String;
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
 } 
-class Maestros {
+class dondeestamos {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
 	public static inline var longX:Int = 600;
@@ -21,7 +27,7 @@ class Maestros {
 	public static var canal:flash.media.SoundChannel;
 	public static var sonido:flash.media.Sound;
 	public static var alarmTimer:flash.utils.Timer;
-	public static var proyeccionClip:flash.display.MovieClip;
+	public static var controlClip:flash.display.MovieClip;
 	public static var contador:Int = 0;
 	
 	public static function main() {
@@ -40,74 +46,64 @@ class Maestros {
 		marco.graphics.endFill();
 		flash.Lib.current.addChild(marco);
 		
-		var volver:Loader = new Loader();
-		volver.load(new flash.net.URLRequest("../imagenes/tierra/volver.png"));
+		var volver:MiSprite = new MiSprite();
+        var bitmap1 = new Volver();
+        volver.addChild(bitmap1);
 		volver.url = "../index.html";
 		volver.scaleX = volver.scaleY -= 0.4;
 		
-		var tierra_menu:Loader = new Loader();
-		tierra_menu.load(new flash.net.URLRequest("../imagenes/tierra/tierra_menu.png"));
+        var tierra_menu:MiSprite = new MiSprite();
+        var bitmap2 = new Tierra_menu();
+        tierra_menu.addChild(bitmap2);
 		tierra_menu.scaleX = tierra_menu.scaleY += 0.2;
-		var humo:Loader = new Loader();
+		var humo:Clip_humo = new Clip_humo();
 		var marco0:Array<Dynamic> = [];
 		marco0 = marco0.concat([0.9, 0, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0.7, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0.3, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0, 0.5, 0]);
-		humo.load(new flash.net.URLRequest("../imagenes/humo.swf"));
 		humo.filters = [new flash.filters.ColorMatrixFilter(marco0)];
 		humo.name = "humoLoader";
 		
-        proyeccionClip = flash.Lib.attach("proyeccion");
-        proyeccionClip.name = "proyeccionClip";
-        proyeccionClip.scaleX = proyeccionClip.scaleY -= 0.1;
-        proyeccionClip.stop();
+        controlClip = flash.Lib.attach("Clip_tierra");
+        controlClip.name = "controlClip";
+        controlClip.scaleX = controlClip.scaleY -= 0.1;
+        controlClip.stop();
 		alarmTimer = new flash.utils.Timer(10000, 0);
 		alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
         alarmTimer.start();
 		
-		var maestros:Loader = new Loader();
-		maestros.load(new flash.net.URLRequest("../imagenes/tierra/maestros.png"));
-		maestros.url = "tierra/maestros.html";
-		maestros.scaleX = maestros.scaleY -= 0.25;
+		var dondeestamos:Texto = new Texto("Dónde estamos",120,130,55,0xffffff,18);
+		dondeestamos.url = "tierra/dondeestamos.html";
 		
-		var delegaciones:Loader = new Loader();
-		delegaciones.load(new flash.net.URLRequest("../imagenes/tierra/delegaciones.png"));
-		delegaciones.url = "tierra/delegaciones.html";
-		delegaciones.scaleX = delegaciones.scaleY -= 0.25;
+		var centros:Texto = new Texto("Centros registrados",360,460,65,0xffffff,18);
+		centros.url = "tierra/centros.html";
 		
-		volver.x = volver.origX = 650;
+		var inscripcion:Texto = new Texto("Inscripcion Shen Uh Kwan",260,60,75,0xffffff,18);
+		centros.url = "tierra/inscripcion.html";
+		
+        volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
-		proyeccionClip.x = proyeccionClip.origX = 250;
-		proyeccionClip.y = proyeccionClip.origY = 180;
+		controlClip.x = controlClip.origX = 250;
+		controlClip.y = controlClip.origY = 180;
 		humo.x = humo.origX = 240;
 		humo.y = humo.origY = 150;
 		tierra_menu.x = tierra_menu.origX = 190;
 		tierra_menu.y = tierra_menu.origY = 20;
-		maestros.x = maestros.origX = 120;
-		maestros.y = maestros.origY= 130;
-		delegaciones.x = delegaciones.origX = 360;
-		delegaciones.y = delegaciones.origY = 460;
 		volver.profun = 15;
 		tierra_menu.profun = 25;
 		humo.profun = 25;
-		proyeccionClip.profun = 40;
-		maestros.profun = 55;
-		delegaciones.profun = 65;
-		arrObj = [tierra_menu, volver, humo, proyeccionClip, maestros, delegaciones];
+		controlClip.profun = 40;
+		arrObj = [tierra_menu, humo, controlClip, dondeestamos, centros, inscripcion, volver];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
 		}
-		maestros.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		maestros.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		maestros.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		delegaciones.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		delegaciones.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		delegaciones.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		volver.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        for (i in 3...arrObj.length){
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        }
 		
 		var archivo:URLRequest = new flash.net.URLRequest("../audio/tierra.mp3");
 		sonido = new flash.media.Sound(archivo);
@@ -115,7 +111,7 @@ class Maestros {
 		}
 
 		public static function onAlarm(arg1:flash.events.TimerEvent) {
-			proyeccionClip.play();
+			controlClip.play();
 		}
 
 		public static function movimiento(arg1:flash.events.Event){
@@ -138,12 +134,12 @@ class Maestros {
 			    arg1.target.x = tmpX;
 			    arg1.target.y = tmpY;
 		    }
-		    if (arg1.target.name == "proyeccionClip"){
-				if (proyeccionClip.currentFrame == 1){
-					proyeccionClip.stop();
+		    if (arg1.target.name == "controlClip"){
+				if (controlClip.currentFrame == 1){
+					controlClip.stop();
 				}
 				if (contador == 5){
-					proyeccionClip.nextFrame();
+					controlClip.nextFrame();
 					contador = 0;
 				}
 				contador = (contador + 1);

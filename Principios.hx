@@ -2,16 +2,45 @@ package;
 
 import flash.display.Loader;
 import flash.display.Sprite;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
 
-class Loader extends flash.display.Loader {
+class Ethnocen extends flash.text.Font{public function new(){super();}} 
+class Volver extends Bitmap{public function new(){super();}} 
+class Fuego_menu extends Bitmap{public function new(){super();}}
+class Clip_humo extends MovieClip{public function new(){super();}}
+
+class MiSprite extends flash.display.Sprite {
 	public var url:String;
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
-} 
+}
+
+class Texto extends flash.text.TextField{
+	public var url:String;
+	public var origX:Int;
+	public var origY:Int;
+	public var profun:Int;
+    public function new(_txt:String,_x:Int,_y:Int,_profun:Int,_col:Int,_tam:Int){
+        super();
+        var format: flash.text.TextFormat = new flash.text.TextFormat();
+        format.font = "Ethnocen";
+        format.color = _col;
+        format.size = _tam;
+        embedFonts = true;
+        autoSize = flash.text.TextFieldAutoSize.RIGHT;
+        defaultTextFormat = format;
+        text = _txt;
+        x = origX = _x;
+        y = origY = _y;
+        profun = _profun;
+    }
+}
+
 class Principios {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
@@ -40,25 +69,26 @@ class Principios {
 		marco.graphics.endFill();
 		flash.Lib.current.addChild(marco);
 
-		var volver:Loader = new Loader();
-		volver.load(new flash.net.URLRequest("../imagenes/fuego/volver.png"));
+		var volver:MiSprite = new MiSprite();
+        var bitmap1 = new Volver();
+        volver.addChild(bitmap1);
 		volver.url = "../index.html";
 		volver.scaleX = volver.scaleY -= 0.4;
-
-		var fuego_menu:Loader = new Loader();
-		fuego_menu.load(new flash.net.URLRequest("../imagenes/fuego/fuego_menu.png"));
+		
+		var fuego_menu:MiSprite = new MiSprite();
+        var bitmap2 = new Fuego_menu();
+        fuego_menu.addChild(bitmap2);
 		fuego_menu.scaleX = fuego_menu.scaleY += 0.1;
-		var humo:Loader = new Loader();
+		var humo:Clip_humo = new Clip_humo();
 		var marco0:Array<Dynamic> = [];
 		marco0 = marco0.concat([1, 0, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0.3, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0.3, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0, 0.5, 0]);
-		humo.load(new flash.net.URLRequest("../imagenes/humo.swf"));
 		humo.filters = [new flash.filters.ColorMatrixFilter(marco0)];
 		humo.name = "humoLoader";
 
-		patadaClip = flash.Lib.attach("patada");
+		patadaClip = flash.Lib.attach("Clip_fuego");
 		patadaClip.name = "patadaClip";
 		patadaClip.scaleX = patadaClip.scaleY -= 0.3;
 		patadaClip.stop();
@@ -71,84 +101,43 @@ class Principios {
 		alarmTimer = new flash.utils.Timer(10000, 0);
 		alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
 		alarmTimer.start();
-
-		var prinhapkido:Loader = new Loader();
-		prinhapkido.load(new flash.net.URLRequest("../imagenes/fuego/principioshapkido.png"));
-		prinhapkido.url = "fuego/principioshapkido.html";
-		prinhapkido.scaleX = prinhapkido.scaleY -= 0.25;
-
-		var prinshenuhkwan:Loader = new Loader();
-		prinshenuhkwan.load(new flash.net.URLRequest("../imagenes/fuego/principiosshenuhkwan.png"));
-		prinshenuhkwan.url = "fuego/principiosshenuhkwan.html";
-		prinshenuhkwan.scaleX = prinshenuhkwan.scaleY -= 0.25;
-
-		var historia:Loader = new Loader();
-		historia.load(new flash.net.URLRequest("../imagenes/fuego/historia.png"));
-		historia.url = "fuego/historia.html";
-		historia.scaleX = historia.scaleY -= 0.25;
-
-		var grados:Loader = new Loader();
-		grados.load(new flash.net.URLRequest("../imagenes/fuego/grados.png"));
-		grados.url = "fuego/grados.html";
-		grados.scaleX = grados.scaleY -= 0.25;
-
-		var naegongki:Loader = new Loader();
-		naegongki.load(new flash.net.URLRequest("../imagenes/fuego/naegongki.png"));
-		naegongki.url = "fuego/naegongki.html";
-		naegongki.scaleX = naegongki.scaleY -= 0.25;
+        
+        var quehacemos:Texto = new Texto("Qué hacemos",420,490,65,0xffffff,18);
+        quehacemos.url = "fuego/quehacemos.html";
+        var hapkido:Texto = new Texto("Hapkido",120,200,65,0xffffff,18);
+        hapkido.url = "fuego/hapkido.html";
+        var shenkumsul:Texto = new Texto("shenkumsul",450,130,65,0xffffff,18);
+        shenkumsul.url = "fuego/shenkumsul.html";
+        var defensa:Texto = new Texto("Defensa femenina",200,60,65,0xffffff,18);
+        defensa.url = "fuego/defensa.html";
+        var policial:Texto = new Texto("Defensa policial",150,410,65,0xffffff,18);
+        policial.url = "fuego/policial.html";
 
 		volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
-		patadaClip.x = patadaClip.origX = 290;
+		patadaClip.x = patadaClip.origX = 270;
 		patadaClip.y = patadaClip.origY = 190;
 		humo.x = humo.origX = 240;
 		humo.y = humo.origY = 230;
 		fuego_menu.x = fuego_menu.origX = 220;
 		fuego_menu.y = fuego_menu.origY = 50;
-		prinhapkido.x = prinhapkido.origX = 120;
-		prinhapkido.y = prinhapkido.origY= 130;
-		prinshenuhkwan.x = prinshenuhkwan.origX = 320;
-		prinshenuhkwan.y = prinshenuhkwan.origY = 450;
-		historia.x = historia.origX = 150;
-		historia.y = historia.origY = 350;
-		grados.x = grados.origX = 420;
-		grados.y = grados.origY =  60;
-		naegongki.x = naegongki.origX = 520;
-		naegongki.y = naegongki.origY = 250;
 		volver.profun = 15;
 		fuego_menu.profun = 25;
 		humo.profun = 25;
 		patadaClip.profun = 40;
-		prinhapkido.profun = 65;
-		historia.profun = 65;
-		prinshenuhkwan.profun = 65;
-		grados.profun = 65;
-		naegongki.profun = 65;
-		arrObj = [fuego_menu, volver, humo, patadaClip, prinhapkido, prinshenuhkwan, historia, grados, naegongki];
+		arrObj = [fuego_menu, humo, patadaClip, quehacemos, hapkido, shenkumsul, defensa,
+               policial, volver];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
 		}
-		prinhapkido.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		prinhapkido.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		prinhapkido.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		prinshenuhkwan.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		prinshenuhkwan.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		prinshenuhkwan.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		historia.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		historia.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		historia.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		grados.addEventListener(flash.events.MouseEvent.ROLL_OVER, Principios.mouseOVER);
-		grados.addEventListener(flash.events.MouseEvent.ROLL_OUT, Principios.mouseOUT);
-		grados.addEventListener(flash.events.MouseEvent.CLICK, Principios.mouseCLICK);
-		naegongki.addEventListener(flash.events.MouseEvent.ROLL_OVER, Principios.mouseOVER);
-		naegongki.addEventListener(flash.events.MouseEvent.ROLL_OUT, Principios.mouseOUT);
-		naegongki.addEventListener(flash.events.MouseEvent.CLICK, Principios.mouseCLICK);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		volver.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        for (i in 3...arrObj.length){
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        }
 
-		var archivo:URLRequest = new flash.net.URLRequest("../audio/fuego.mp3");
+        var archivo:URLRequest = new flash.net.URLRequest("../audio/fuego.mp3");
 		sonido = new flash.media.Sound(archivo);
 		canal = sonido.play(0, 10);
 	}
