@@ -2,6 +2,8 @@ package;
 
 import flash.display.Loader;
 import flash.display.Sprite;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
@@ -17,8 +19,30 @@ class MiSprite extends flash.display.Sprite {
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
-} 
-class dondeestamos {
+}
+
+class Texto extends flash.text.TextField{
+	public var url:String;
+	public var origX:Int;
+	public var origY:Int;
+	public var profun:Int;
+    public function new(_txt:String,_x:Int,_y:Int,_profun:Int,_col:Int,_tam:Int){
+        super();
+        var format: flash.text.TextFormat = new flash.text.TextFormat();
+        format.font = "Ethnocen";
+        format.color = _col;
+        format.size = _tam;
+        embedFonts = true;
+        autoSize = flash.text.TextFieldAutoSize.RIGHT;
+        defaultTextFormat = format;
+        text = _txt;
+        x = origX = _x;
+        y = origY = _y;
+        profun = _profun;
+    }
+}
+
+class Maestros {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
 	public static inline var longX:Int = 600;
@@ -66,34 +90,34 @@ class dondeestamos {
 		humo.name = "humoLoader";
 		
         controlClip = flash.Lib.attach("Clip_tierra");
-        controlClip.name = "controlClip";
-        controlClip.scaleX = controlClip.scaleY -= 0.1;
+        controlClip.name = "control";
+        /*controlClip.scaleX = controlClip.scaleY -= 0.1;*/
         controlClip.stop();
-		alarmTimer = new flash.utils.Timer(10000, 0);
+		alarmTimer = new flash.utils.Timer(1000, 0);
 		alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
         alarmTimer.start();
 		
-		var dondeestamos:Texto = new Texto("Dónde estamos",120,130,55,0xffffff,18);
+		var dondeestamos:Texto = new Texto("Dónde estamos",120,190,55,0xffffff,18);
 		dondeestamos.url = "tierra/dondeestamos.html";
 		
 		var centros:Texto = new Texto("Centros registrados",360,460,65,0xffffff,18);
 		centros.url = "tierra/centros.html";
 		
-		var inscripcion:Texto = new Texto("Inscripcion Shen Uh Kwan",260,60,75,0xffffff,18);
+		var inscripcion:Texto = new Texto("Inscripción Shen Uh Kwan",260,60,75,0xffffff,18);
 		centros.url = "tierra/inscripcion.html";
 		
         volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
-		controlClip.x = controlClip.origX = 250;
-		controlClip.y = controlClip.origY = 180;
-		humo.x = humo.origX = 240;
-		humo.y = humo.origY = 150;
+		controlClip.x = controlClip.origX = 290;
+		controlClip.y = controlClip.origY = 250;
+		humo.x = humo.origX = 200;
+		humo.y = humo.origY = 200;
 		tierra_menu.x = tierra_menu.origX = 190;
 		tierra_menu.y = tierra_menu.origY = 20;
 		volver.profun = 15;
 		tierra_menu.profun = 25;
 		humo.profun = 25;
-		controlClip.profun = 40;
+		controlClip.profun = 25;
 		arrObj = [tierra_menu, humo, controlClip, dondeestamos, centros, inscripcion, volver];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
@@ -134,7 +158,7 @@ class dondeestamos {
 			    arg1.target.x = tmpX;
 			    arg1.target.y = tmpY;
 		    }
-		    if (arg1.target.name == "controlClip"){
+		    if (arg1.target.name == "control"){
 				if (controlClip.currentFrame == 1){
 					controlClip.stop();
 				}

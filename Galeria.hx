@@ -2,16 +2,45 @@ package;
 
 import flash.display.Loader;
 import flash.display.Sprite;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
 
-class Loader extends flash.display.Loader {
+class Ethnocen extends flash.text.Font{public function new(){super();}} 
+class Volver extends Bitmap{public function new(){super();}} 
+class Metal_menu extends Bitmap{public function new(){super();}}
+class Clip_humo extends MovieClip{public function new(){super();}}
+
+class MiSprite extends flash.display.Sprite {
 	public var url:String;
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
 } 
+
+class Texto extends flash.text.TextField{
+	public var url:String;
+	public var origX:Int;
+	public var origY:Int;
+	public var profun:Int;
+    public function new(_txt:String,_x:Int,_y:Int,_profun:Int,_col:Int,_tam:Int){
+        super();
+        var format: flash.text.TextFormat = new flash.text.TextFormat();
+        format.font = "Ethnocen";
+        format.color = _col;
+        format.size = _tam;
+        embedFonts = true;
+        autoSize = flash.text.TextFieldAutoSize.RIGHT;
+        defaultTextFormat = format;
+        text = _txt;
+        x = origX = _x;
+        y = origY = _y;
+        profun = _profun;
+    }
+}
+
 class Galeria {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
@@ -21,13 +50,14 @@ class Galeria {
 	public static var canal:flash.media.SoundChannel;
 	public static var sonido:flash.media.Sound;
 	public static var alarmTimer:flash.utils.Timer;
-	public static var emiliClip:flash.display.MovieClip;
+	public static var metalClip:flash.display.MovieClip;
 	public static var contador:Int = 0;
 	
 	public static function main() {
 
 		var marco:Sprite = new flash.display.Sprite();
-		marco.graphics.beginFill(138823223);
+		/*marco.graphics.beginFill(138823223);*/
+		marco.graphics.beginFill(0xaaaaaa);
 		marco.graphics.drawRect(100, 50, 600, 500);
 		var arr1:Array<Int> = [13882323, 7237230, 3750201];
 		var arr2:Array<Int> = [1, 1, 1];
@@ -40,104 +70,69 @@ class Galeria {
 		marco.graphics.endFill();
 		flash.Lib.current.addChild(marco);
 		
-		var volver:Loader = new Loader();
-		volver.load(new flash.net.URLRequest("../imagenes/metal/volver.png"));
+		var volver:MiSprite = new MiSprite();
+        var bitmap1 = new Volver();
+        volver.addChild(bitmap1);
 		volver.url = "../index.html";
 		volver.scaleX = volver.scaleY -= 0.4;
 		
-		var metal_menu:Loader = new Loader();
-		metal_menu.load(new flash.net.URLRequest("../imagenes/metal/metal_menu.png"));
+		var metal_menu:MiSprite = new MiSprite();
+        var bitmap2 = new Metal_menu();
+        metal_menu.addChild(bitmap2);
 		metal_menu.scaleX = metal_menu.scaleY -= 0.2;
-		var humo:Loader = new Loader();
+		var humo:Clip_humo = new Clip_humo();
 		var marco0:Array<Dynamic> = [];
 		marco0 = marco0.concat([1, 0, 0, 0, 0]);
 		marco0 = marco0.concat([0, 1, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0, 1, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0, 0.5, 0]);
-		humo.load(new flash.net.URLRequest("../imagenes/humo.swf"));
 		humo.filters = [new flash.filters.ColorMatrixFilter(marco0)];
 		humo.name = "humoLoader";
 		
-        emiliClip = flash.Lib.attach("patada");
-        emiliClip.name = "emiliClip";
-        emiliClip.scaleX = emiliClip.scaleY -= 0.15;
-        emiliClip.stop();
+        metalClip = flash.Lib.attach("Clip_metal");
+        metalClip.name = "metalClip";
+        metalClip.scaleX = metalClip.scaleY -= 0.25;
+        metalClip.stop();
 		alarmTimer = new flash.utils.Timer(5000, 0);
 		alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
         alarmTimer.start();
+	
+        var galeria:Texto = new Texto("galería",100,100,65,0xffffff,18);
+		galeria.url = "metal/galeria.html";
 		
-		var videos:Loader = new Loader();
-		videos.load(new flash.net.URLRequest("../imagenes/metal/videos.png"));
-		videos.url = "metal/videos.html";
-		videos.scaleX = videos.scaleY -= 0.25;
-		
-		var fotos:Loader = new Loader();
-		fotos.load(new flash.net.URLRequest("../imagenes/metal/fotos.png"));
-		fotos.url = "metal/fotos.html";
-		fotos.scaleX = fotos.scaleY -= 0.25;
-		
-        var articulos:Loader = new Loader();
-		articulos.load(new flash.net.URLRequest("../imagenes/metal/articulos.png"));
+		var articulos:Texto = new Texto("artículos",300,450,75,0xffffff,18);
 		articulos.url = "metal/articulos.html";
-		articulos.scaleX = articulos.scaleY -= 0.25;
 		
-		var descargas:Loader = new Loader();
-		descargas.load(new flash.net.URLRequest("../imagenes/metal/descargas.png"));
-		descargas.url = "metal/descargas.html";
-		descargas.scaleX = descargas.scaleY -= 0.25;
-
         volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
-		emiliClip.x = emiliClip.origX = 170;
-		emiliClip.y = emiliClip.origY = 180;
+		metalClip.x = metalClip.origX = 170;
+		metalClip.y = metalClip.origY = 180;
 		humo.x = humo.origX = 240;
 		humo.y = humo.origY = 150;
 		metal_menu.x = metal_menu.origX = 250;
 		metal_menu.y = metal_menu.origY = 50;
-		videos.x = videos.origX = 190;
-		videos.y = videos.origY= 130;
-		fotos.x = fotos.origX = 200;
-		fotos.y = fotos.origY = 450;
-		descargas.x = descargas.origX = 400;
-		descargas.y = descargas.origY = 430;
-		articulos.x = articulos.origX = 440;
-		articulos.y = articulos.origY = 150;
 		volver.profun = 15;
 		metal_menu.profun = 25;
 		humo.profun = 25;
-		emiliClip.profun = 35;
-		videos.profun = 55;
-		descargas.profun = 70;
-		fotos.profun = 75;
-        articulos.profun = 60;
-		arrObj = [metal_menu, volver, humo, emiliClip, videos, fotos, descargas,articulos];
+		metalClip.profun = 35;
+		arrObj = [metal_menu, humo, metalClip, galeria, volver, articulos];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
 		}
-		videos.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		videos.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		videos.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		fotos.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		fotos.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		fotos.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		descargas.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		descargas.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		descargas.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		articulos.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		articulos.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		articulos.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		volver.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		
+        for (i in 3...arrObj.length){
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        }
+	
 		var archivo:URLRequest = new flash.net.URLRequest("../audio/metal.mp3");
 		sonido = new flash.media.Sound(archivo);
 		canal = sonido.play(0, 10);
 		}
 
 		public static function onAlarm(arg1:flash.events.TimerEvent) {
-			emiliClip.play();
+			metalClip.play();
 		}
 
 		public static function movimiento(arg1:flash.events.Event){
@@ -160,12 +155,12 @@ class Galeria {
 			    arg1.target.x = tmpX;
 			    arg1.target.y = tmpY;
 		    }
-		    if (arg1.target.name == "emiliClip"){
-				if (emiliClip.currentFrame == 1){
-					emiliClip.stop();
+		    if (arg1.target.name == "metalClip"){
+				if (metalClip.currentFrame == 1){
+					metalClip.stop();
 				}
 				//if (contador == 5){
-				//	emiliClip.nextFrame();
+				//	metalClip.nextFrame();
 				//	contador = 0;
 				//}
 				//contador = (contador + 1);
