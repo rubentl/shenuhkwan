@@ -26,3 +26,9 @@
 -swf-header 800:600:25:000000
 -swf9 menus/galeria.swf
 -main Galeria
+
+--next
+-swf-lib imagenes/agua/agua.swf
+-swf-header 800:600:25:000000
+-swf9 menus/noticias.swf
+-main Noticias

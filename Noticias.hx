@@ -2,18 +2,46 @@ package;
 
 import flash.display.Loader;
 import flash.display.Sprite;
-//import flash.events.*;
-//import flash.filters.*;
+import flash.display.Bitmap;
+import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.media.Sound;
 import flash.net.URLRequest;
-//import flash.utils.*;
-class Loader extends flash.display.Loader {
+
+class Ethnocen extends flash.text.Font{public function new(){super();}} 
+class Volver extends Bitmap{public function new(){super();}} 
+class Agua_menu extends Bitmap{public function new(){super();}}
+class Clip_humo extends MovieClip{public function new(){super();}}
+class Clip_agua extends MovieClip{public function new(){super();}}
+
+class MiSprite extends flash.display.Sprite {
 	public var url:String;
 	public var origX:Int;
 	public var origY:Int;
 	public var profun:Int;
 } 
+
+class Texto extends flash.text.TextField{
+	public var url:String;
+	public var origX:Int;
+	public var origY:Int;
+	public var profun:Int;
+    public function new(_txt:String,_x:Int,_y:Int,_profun:Int,_col:Int,_tam:Int){
+        super();
+        var format: flash.text.TextFormat = new flash.text.TextFormat();
+        format.font = "Ethnocen";
+        format.color = _col;
+        format.size = _tam;
+        embedFonts = true;
+        autoSize = flash.text.TextFieldAutoSize.RIGHT;
+        defaultTextFormat = format;
+        text = _txt;
+        x = origX = _x;
+        y = origY = _y;
+        profun = _profun;
+    }
+}
+
 class Noticias {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
@@ -42,26 +70,26 @@ class Noticias {
 		marco.graphics.endFill();
 		flash.Lib.current.addChild(marco);
 		
-		var volver:Loader = new Loader();
-		volver.load(new flash.net.URLRequest("../imagenes/agua/volver.png"));
+		var volver:MiSprite = new MiSprite();
+        var bitmap1 = new Volver();
+        volver.addChild(bitmap1);
 		volver.url = "../index.html";
 		volver.scaleX = volver.scaleY -= 0.4;
 		
-		var agua_menu:Loader = new Loader();
-		agua_menu.load(new flash.net.URLRequest("../imagenes/agua/agua_menu.png"));
+		var agua_menu:MiSprite = new MiSprite();
+        var bitmap2 = new Agua_menu();
+        agua_menu.addChild(bitmap2);
 		agua_menu.scaleX = agua_menu.scaleY -= 0.2;
-		var humo:Loader = new Loader();
+		var humo:Clip_humo = new Clip_humo();
 		var marco0:Array<Dynamic> = [];
 		marco0 = marco0.concat([0.7, 0, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0.7, 0, 0, 0]);
 		marco0 = marco0.concat([0, 0, 1, 0, 0]);
 		marco0 = marco0.concat([0, 0, 0, 0.5, 0]);
-		humo.load(new flash.net.URLRequest("../imagenes/humo.swf"));
 		humo.filters = [new flash.filters.ColorMatrixFilter(marco0)];
-		humo.name = "humoLoader";
+        humo.name = "humoLoader";
 		
-		var tigre:Loader = new Loader();
-		tigre.load(new flash.net.URLRequest("../imagenes/agua/tigre.swf"));
+		var tigre:Clip_agua = new Clip_agua();
 		tigre.scaleX = tigre.scaleY -= 0.25;
 			//tigreClip.stop();
 		tigre.name = "tigreLoader";
@@ -69,21 +97,22 @@ class Noticias {
 			//alarmTimer.addEventListener(flash.events.TimerEvent.TIMER, onAlarm);
 			//alarmTimer.start();
 		
-		var eventos:Loader = new Loader();
-		eventos.load(new flash.net.URLRequest("../imagenes/agua/eventos.png"));
-		eventos.url = "agua/eventos.html";
-		eventos.scaleX = eventos.scaleY -= 0.25;
+        var programas:Texto = new Texto("Programas",120,90,65,0xffffff,18);
+		programas.url = "agua/programas.html";
 		
-		var contacto:Loader = new Loader();
-		contacto.load(new flash.net.URLRequest("../imagenes/agua/contacto.png"));
-		contacto.url = "agua/contacto.html";
-		contacto.scaleX = contacto.scaleY -= 0.25;
+		var shenuhdo:Texto = new Texto("shen uh do",450,140,65,0xffffff,18);
+		shenuhdo.url = "agua/shenuhdo.html";
 		
-		var enlaces:Loader = new Loader();
-		enlaces.load(new flash.net.URLRequest("../imagenes/agua/enlaces.png"));
-		enlaces.url = "agua/enlaces.html";
-		enlaces.scaleX = enlaces.scaleY -= 0.25;
-		volver.x = volver.origX = 650;
+		var kigong:Texto = new Texto("kigong",100,300,95,0xffffff,18);
+		kigong.url = "agua/kigong.html";
+
+		var fumshu:Texto = new Texto("fumshu",120,500,85,0xffffff,18);
+		fumshu.url = "agua/fumshu.html";
+
+		var terapias:Texto = new Texto("terapias",420,450,75,0xffffff,18);
+		terapias.url = "agua/terapias.html";
+		
+        volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
 		tigre.x = tigre.origX = 260;
 		tigre.y = tigre.origY = 220;
@@ -91,37 +120,22 @@ class Noticias {
 		humo.y = humo.origY = 150;
 		agua_menu.x = agua_menu.origX = 250;
 		agua_menu.y = agua_menu.origY = 50;
-		eventos.x = eventos.origX = 130;
-		eventos.y = eventos.origY= 130;
-		contacto.x = contacto.origX = 200;
-		contacto.y = contacto.origY = 450;
-		enlaces.x = enlaces.origX = 500;
-		enlaces.y = enlaces.origY = 150;
 		volver.profun = 15;
 		agua_menu.profun = 25;
 		humo.profun = 25;
 		tigre.profun = 35;
-		eventos.profun = 55;
-		enlaces.profun = 60;
-		contacto.profun = 75;
-		arrObj = [agua_menu, volver, humo, tigre, eventos, contacto, enlaces];
+		arrObj = [agua_menu, humo, tigre, programas, shenuhdo, kigong, terapias,
+               fumshu, volver];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			Noticias.arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
 		}
-		eventos.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		eventos.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		eventos.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		contacto.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		contacto.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		contacto.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		enlaces.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		enlaces.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		enlaces.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
-		volver.addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
-		volver.addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
-		
+        for (i in 3...arrObj.length){
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OVER, mouseOVER);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseOUT);
+		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
+        }
+	
 		var archivo:URLRequest = new flash.net.URLRequest("../audio/agua.mp3");
 		sonido = new flash.media.Sound(archivo);
 		canal = sonido.play(0, 10);
