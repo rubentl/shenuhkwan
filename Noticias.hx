@@ -42,6 +42,69 @@ class Texto extends flash.text.TextField{
     }
 }
 
+//Clases para el campo de estrellas
+class Start extends flash.display.Sprite{
+    private var d:Float;
+    private var r:Float;
+    private var stageCenter:flash.geom.Point;
+    private var speed:Float;
+    private static inline var acceleration:Float = 1.025;
+    public function new(){
+        super();
+        this.alpha=0;
+        init();
+        addEventListener(flash.events.Event.ADDED_TO_STAGE, onAddedToStage);
+    }
+    private function onAddedToStage(e:flash.events.Event){
+        removeEventListener(flash.events.Event.ADDED_TO_STAGE, onAddedToStage);
+        addEventListener(flash.events.Event.ENTER_FRAME, update);
+        stageCenter = new flash.geom.Point(flash.Lib.current.stage.stageWidth / 2, 
+                flash.Lib.current.stage.stageHeight / 2);
+    }
+    private function update(e:flash.events.Event){
+        d*= acceleration + (speed*0.25); 
+        alpha= d/500; // fades in the stars as they get closer.
+        x = stageCenter.x + Math.cos(r) * d/2;
+        y = stageCenter.y + Math.sin(r) * d / 2;
+        // loop star when it goes off the stage.
+        if (x > stageCenter.x *2 || x < 0 || y > stageCenter.y *2 || y < 0) {
+            init();
+        }
+    }		
+    private function init(){
+        // init values;
+        r = Math.random() * 6;
+        d = Math.random() * 150;
+        speed = Math.random() * 0.0510;
+        // draw circle
+        this.graphics.clear();
+        this.graphics.beginFill(0xFFFFFF);
+        this.graphics.drawCircle(0, 0, speed*40);			
+    }
+}
+
+class Universo extends flash.display.Sprite{
+    static var padre:Sprite;
+    public function new(_padre:Sprite){
+        super();
+        name = "universo";
+        x = 800 / 2;
+        y = 600 / 2;
+        padre = _padre;
+        addEventListener(flash.events.Event.ENTER_FRAME,update);
+    }
+    public function update(e:flash.events.Event){
+        if (padre.numChildren < 400){
+            var s:Start = new Start();
+            s.x = Math.random()*1000;
+            s.y = Math.random()*650;
+            padre.addChild(s);
+        } else {
+            removeEventListener(flash.events.Event.ENTER_FRAME, update);
+        }
+    }
+}
+
 class Noticias {
 	public static inline var baseX:Int = 100;
 	public static inline var baseY:Int = 50;
@@ -55,6 +118,14 @@ class Noticias {
 	public static var contador:Int = 0;
 	
 	public static function main() {
+
+        var fondo:Sprite = new Sprite();
+        fondo.x = 0;
+        fondo.y = 0;
+        var univer:Universo = new Universo(fondo);
+        fondo.addChild(univer);
+		flash.Lib.current.addChild(fondo);
+
 
 		var marco:Sprite = new flash.display.Sprite();
 		marco.graphics.beginFill(29928);

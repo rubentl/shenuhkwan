@@ -130,6 +130,12 @@ class Principal {
         logo.filters = [new flash.filters.GlowFilter(0xff0000, 1, 30, 30)];
         mc.addChild(logo);
 
+        var pie:Texto = new Texto("Asociación española de Hapkido y a.a.m.m."+
+                " tradicionales",120,560,0xffffff,13);
+        var pie2:Texto = new Texto("número de Registro: 594.159",300,580,0xffffff,10);
+        mc.addChild(pie);
+        mc.addChild(pie2);
+
         ElMenu();
 
         tim = new flash.utils.Timer(3000, 1);
