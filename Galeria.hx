@@ -170,9 +170,15 @@ class Galeria {
         var galeria:Texto = new Texto("galería",100,100,65,0xffffff,18);
 		galeria.url = "metal/galeria.html";
 		
-		var articulos:Texto = new Texto("artículos",300,450,75,0xffffff,18);
+		var articulos:Texto = new Texto("artículos",450,450,75,0xffffff,18);
 		articulos.url = "metal/articulos.html";
 		
+		var noticias:Texto = new Texto("noticias",510,200,75,0xffffff,18);
+		noticias.url = "metal/noticias.html";
+		
+        var paris:Texto = new Texto("París Bercy 2009",100,400,75,0xffffff,18);
+		paris.url = "metal/parisbercy.html";
+        
         volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
 		metalClip.x = metalClip.origX = 170;
@@ -185,7 +191,7 @@ class Galeria {
 		metal_menu.profun = 25;
 		humo.profun = 25;
 		metalClip.profun = 35;
-		arrObj = [metal_menu, humo, metalClip, galeria, volver, articulos];
+		arrObj = [metal_menu, humo, metalClip, galeria, volver, articulos,paris, noticias];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
