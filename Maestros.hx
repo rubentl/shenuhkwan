@@ -174,7 +174,7 @@ class Maestros {
 		centros.url = "tierra/centros.html";
 		
 		var inscripcion:Texto = new Texto("Inscripción Shen Uh Kwan",260,60,75,0xffffff,18);
-		centros.url = "tierra/inscripcion.html";
+		inscripcion.url = "tierra/inscripcion.html";
 		
         volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;

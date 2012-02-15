@@ -170,8 +170,12 @@ class Quienessomos {
         bienvenidos.url = "madera/bienvenidos.html";
         var quienes:Texto = new Texto("Quienes somos",400,150,60,0xffffff,18);
         quienes.url = "madera/quienes.html";
-        var contacto:Texto = new Texto("Contacto",320,450,65,0xffffff,18);
+        var contacto:Texto = new Texto("Contacto",140,300,65,0xffffff,18);
         contacto.url = "madera/contacto.html";
+        var historia:Texto = new Texto("Historia",120,450,75,0xffffff,18);
+        historia.url = "madera/historia.html";
+        var escudo:Texto = new Texto("Nuestro escudo",400,490,85,0xffffff,18);
+        escudo.url = "madera/escudo.html";
 
 		volver.x = volver.origX = 650;
 		volver.y = volver.origY = 70;
@@ -185,7 +189,8 @@ class Quienessomos {
 		madera_menu.profun = 25;
 		humo.profun = 25;
 		manuClip.profun = 40;
-		arrObj = [madera_menu, humo, manuClip, bienvenidos, quienes, contacto, volver];
+		arrObj = [madera_menu, humo, manuClip, bienvenidos, quienes, contacto, historia,
+               escudo, volver];
 		for (i in 0...arrObj.length){
 		    marco.addChild(arrObj[i]);
 		    arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);
@@ -196,7 +201,7 @@ class Quienessomos {
 		    arrObj[i].addEventListener(flash.events.MouseEvent.CLICK, mouseCLICK);
         }
 
-		var archivo:URLRequest = new flash.net.URLRequest("audio/madera.mp3");
+		var archivo:URLRequest = new flash.net.URLRequest("../audio/madera.mp3");
 		sonido = new flash.media.Sound(archivo);
 		canal = sonido.play(0, 10);
 	}
