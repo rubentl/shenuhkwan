@@ -192,7 +192,7 @@ class Principios {
 		humo.y = humo.origY = 230;
 		fuego_menu.x = fuego_menu.origX = 220;
 		fuego_menu.y = fuego_menu.origY = 50;
-		volver.profun = 15;
+		/*volver.profun = 15;*/
 		fuego_menu.profun = 25;
 		humo.profun = 25;
 		patadaClip.profun = 40;

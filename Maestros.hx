@@ -188,7 +188,8 @@ class Maestros {
 		tierra_menu.profun = 25;
 		humo.profun = 25;
 		controlClip.profun = 25;
-		arrObj = [tierra_menu, humo, controlClip, dondeestamos, centros, inscripcion, volver];
+		arrObj = [tierra_menu, humo, controlClip, dondeestamos, centros, inscripcion,
+               volver];
 		for (i in 0...arrObj.length){
 			marco.addChild(arrObj[i]);
 			arrObj[i].addEventListener(flash.events.Event.ENTER_FRAME, movimiento);

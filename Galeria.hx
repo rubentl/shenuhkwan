@@ -187,7 +187,7 @@ class Galeria {
 		humo.y = humo.origY = 150;
 		metal_menu.x = metal_menu.origX = 250;
 		metal_menu.y = metal_menu.origY = 50;
-		volver.profun = 15;
+		/*volver.profun = 15;*/
 		metal_menu.profun = 25;
 		humo.profun = 25;
 		metalClip.profun = 35;
