@@ -1,0 +1,52 @@
+
+web=/home/ruben/Documentos/nasm/flash/web/web_trabajo CD=. filter="*.hx *.xml *.hxml" {
+ Galeria.hx
+ Maestros.hx
+ Noticias.hx
+ Principal.hx
+ Principios.hx
+ Quienessomos.hx
+ compilar.hxml
+ audio=audio {
+ }
+ imagenes=imagenes {
+  agua=agua {
+  }
+  fuego=fuego {
+  }
+  madera=madera {
+  }
+  metal=metal {
+  }
+  tierra=tierra {
+  }
+ }
+ menus=menus {
+  agua=agua {
+  }
+  fuego=fuego {
+  }
+  madera=madera {
+  }
+  metal=metal {
+  }
+  tierra=tierra {
+  }
+ }
+ recursos=recursos {
+  agua=agua {
+  }
+  fuego=fuego {
+   recurso.xml
+  }
+  madera=madera {
+   recurso.xml
+  }
+  metal=metal {
+   recurso.xml
+  }
+  tierra=tierra {
+   recurso.xml
+  }
+ }
+}

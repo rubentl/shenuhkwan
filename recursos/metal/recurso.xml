@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<movie version='9' width="320" height="240" framerate="25" as3="1">
+   <background color="#ffffff"/>
+   <frame>
+       <library>
+           <clip id="1" import="imagen1.png" />
+           <clip id="2" import="imagen2.png"/>
+           <clip id="3" import="imagen3.png"/>
+           <clip id="4" import="imagen4.png"/>
+           <clip id="patada">
+               <frame>
+                   <place id="1" depth="1"/>
+               </frame>
+               <frame>
+                   <place id="2" depth="1"/>
+               </frame>
+               <frame>
+                   <place id="3" depth="1"/>
+               </frame>
+               <frame>
+                   <place id="4" depth="1"/>
+               </frame>
+               <frame>
+                   <place id="1" depth="1"/>
+               </frame>
+           </clip>
+       </library>
+   </frame>
+</movie>
+

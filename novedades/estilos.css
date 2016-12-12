@@ -1,0 +1,120 @@
+@import url("reset.css");
+
+body{
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDHRQ3OPLUoNgAAAAodEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVAgcG9yIFJ1YmVuIFRvY2E/27MoAAAAG0lEQVQI12NgwAIYofR/ZDEmLAoYkAX/M+ADAGuYAgYj/d8cAAAAAElFTkSuQmCC) repeat scroll left top #222;
+	margin: 0 auto;
+	width: 960px;
+}
+
+a{
+	color: #cc0033;
+	text-decoration: underline;
+}
+
+em{
+    font-weight: bold;
+    font-size:18px;
+}
+
+.textos, .fecha, .nota, .titulo{
+	font-family:"Palatino" , Arial, sans-serif;
+}
+
+.nota{
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFAQMAAAC3obSmAAAABlBMVEUAAAAkJCRXyFKEAAAAAXRSTlMAQObYZgAAABtJREFUeF4FwTEBAAAIAyBOTyMYxWiLPhBjnS8FsgD551YkkgAAAABJRU5ErkJggg==) repeat scroll left top #111;
+	border: solid 1px #3300cc;
+	border-radius: 10px;
+	-ms-border-radius: 10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	margin-left: auto; 
+	margin-right: auto;
+	margin-bottom:20px;
+	width: 900px;
+	padding: 10px;
+	font-size:20px;
+	color: #fff;
+	float:left;
+	clear: both;
+}
+
+#enlaces{
+	font-size:18px;
+	text-align: center;	
+}
+
+.fecha{
+    font-size:20px;
+    color:#8ae234;
+    font-weight: bold;
+    display:inline;
+    float:left;
+}
+
+.imagen{
+display:inline;
+float: left;
+}
+
+.logo_tigre, .logo, .titulo{
+	height: 150px;
+	width: 300px;
+	display: inline;
+}
+
+.logo_tigre{
+	background:url("img/logo_tigre.png") top right no-repeat transparent;
+	float:right;
+}
+
+.titulo{
+	font-size:40px;
+	color: #fff;
+	padding-left: 20px;
+	text-align: center;
+	padding-top: 40px;
+}
+
+.textos{
+	font-size: 18px;
+	display:inline;
+	padding:5px 5px 5px 5px ;
+	text-align: left;
+}
+
+.logo{
+	background:url("img/logo.png") top left no-repeat transparent;
+	float:left;
+}
+
+.cabecera{
+	margin: 0 auto;
+	padding: 20px;
+	width: 300px;
+	height: 150px;
+	width: 900px;
+}
+
+.agua, .fuego, .tierra, .metal, .madera{
+	display:inline;
+	width: 60px;
+	height: 59px;
+	float:left;
+}
+
+.agua{
+	background:url("img/agua.png") top left no-repeat transparent;
+}
+.fuego{
+	background:url("img/fuego.png") top left no-repeat transparent;
+}
+.tierra{
+	background:url("img/tierra.png") top left no-repeat transparent;
+}
+.metal{
+	background:url("img/metal.png") top left no-repeat transparent;
+}
+.madera{
+	background:url("img/madera.png") top left no-repeat transparent;
+}

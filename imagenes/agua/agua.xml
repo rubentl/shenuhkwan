@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<movie version="9" width="800" height="600" framerate="2" as3="1">
+  <background color="#000000"/>
+  <frame>
+    <library>
+        <font name = "Ethnocen" import    = "../../recursos/ETHNOCEN.TTF" glyphs       = "abcdefghijklmnñopqrstuvwxyz áéíóúÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789"/>
+	<bitmap id = "Volver" import        = "volver.png"/>
+	<bitmap id = "Agua_menu" import        = "agua_menu.png"/>
+    <clip   id = "Clip_agua" import = "tigre.swf" />
+    <clip   id = "Clip_humo" import = "../humo.swf" />
+    </library>
+  </frame>
+</movie>

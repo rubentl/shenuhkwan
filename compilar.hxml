@@ -1,0 +1,16 @@
+-swf-lib recursos.swf
+-swf-header 800:600:25:000000
+-swf9 todo.swf
+-main Todo
+
+--next
+-swf-lib imagenes/madera/madera.swf
+-swf-header 800:600:25:000000
+-swf9 quienessomos.swf
+-main Quienessomos
+
+--next
+-swf-lib imagenes/fuego/fuego.swf
+-swf-header 800:600:25:000000
+-swf9 piincipios.swf
+-main Principios
